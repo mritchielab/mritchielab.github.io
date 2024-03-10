@@ -19,12 +19,12 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Ritchie Lab
-email: email@email.com
+email: mritchie [at] wehi.edu.au
 description: >- # this means to ignore newlines until "baseurl:"
-  Ritchie Lab develops cutting-edge statistical methods and open-source software, accelerating genomic discoveries worldwide.
+  We develop cutting-edge statistical methods and open-source software that accelerates genomic research worldwide.
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "https://mritchielab.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: twitter
+twitter_username: mritchieau
 github_username:  mritchielab
 
 # Build settings
@@ -37,6 +37,8 @@ header_pages:
  - software.markdown
  - datasets.markdown
 
+collections:
+  software:
 
 # Exclude from processing.
 # The following items will not be processed, by default.

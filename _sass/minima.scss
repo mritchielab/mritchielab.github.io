@@ -10,7 +10,7 @@ $base-line-height: 1.5 !default;
 
 $spacing-unit:     30px !default;
 
-$text-color:       #111 !default;
+$text-color:       #343333 !default;
 $text-hovor-color:   rgb(190, 190, 190) !default;
 
 $background-color: #fdfdfd !default;
@@ -70,4 +70,23 @@ $on-laptop:        800px !default;
   margin-left: auto;
   padding-top: 10px;
   padding-bottom: 10px;
+}
+
+.software-package-icon {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 60px;
+  padding-right: 10px;
+}
+
+.software-link-icon {
+  padding-right: 5px;
+  width: 18px;
+}
+
+.software-container {
+  border: 1px solid lighten($text-color, 70%);
+  border-radius: 10px;
+  padding: 20px;
+  margin-top: 20px;;
 }
