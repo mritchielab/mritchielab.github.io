@@ -21,9 +21,11 @@ permalink: /software/
         Github
         </a>
     </p>
+    {%- if software.bioconductor -%}
     <p>
         <a href="{{ software.bioconductor }}"><img src="/assets/images/bioc.png" class="software-link-icon"/> Bioconductor</a>
     </p>
+    {%- endif -%}
     {%- if software.papers -%}
     <h4>Research papers</h4>
     <ul>
