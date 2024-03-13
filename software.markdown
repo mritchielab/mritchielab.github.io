@@ -27,7 +27,7 @@ permalink: /software/
     </p>
     {%- endif -%}
     {%- if software.papers -%}
-    <h4>Research papers</h4>
+    <h4>Publications</h4>
     <ul>
         {%- for paper in software.papers -%}
         <li>
