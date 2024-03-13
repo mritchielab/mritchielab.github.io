@@ -7,4 +7,35 @@ title: Datasets
 permalink: /datasets/
 ---
 
-Under construction 🏗️
+{% for dataset in site.datasets %}
+<div class="software-container">
+    <h2>
+        {{ dataset.name }}
+    </h2>
+    {%- if dataset.icon -%}
+    <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}"/>
+    {%- endif -%}
+    <p>
+        <a href="{{ dataset.dataset }}">
+            <svg class="svg-icon" width="100%"><use xlink:href="/assets/minima-social-icons.svg#database"></use></svg>
+            Dataset
+        </a>
+    </p>
+    <p>
+        <a href="{{ dataset.code }}">
+            <svg class="svg-icon" width="100%"><use xlink:href="/assets/minima-social-icons.svg#code"></use></svg>
+            Analysis Code
+        </a>
+    </p>
+    {%- if dataset.papers -%}
+    <h4>Publications</h4>
+    <ul>
+        {%- for paper in dataset.papers -%}
+        <li>
+            <a href="{{ paper.url }}">{{ paper.name }}</a>
+        </li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
+</div>
+{% endfor %}

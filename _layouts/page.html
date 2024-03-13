@@ -2,18 +2,15 @@
 layout: default
 ---
 <article class="post">
-
   <header class="post-header">
     {%- if page.title != "About" and page.title != "Datasets" -%}
     <h1 class="post-title">{{ page.title | escape }}</h1>
     {%- endif -%}
     {%- if page.title == "Datasets" -%}
-    <h1 class="post-title">Datasets and Analysis Code</h1>
+    <h1 class="post-title">Datasets</h1>
     {%- endif -%}
   </header>
-
   <div class="post-content">
     {{ content }}
   </div>
-
 </article>
