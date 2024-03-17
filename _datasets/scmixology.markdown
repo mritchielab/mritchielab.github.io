@@ -1,6 +1,9 @@
 ---
 name: sc-mixology 
-dataset: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE118767
+datasets:
+    -
+        name: GSE118767
+        url: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE118767
 code: https://github.com/LuyiTian/sc_mixology
 papers:
     - 

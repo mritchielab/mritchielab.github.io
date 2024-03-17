@@ -15,12 +15,16 @@ permalink: /datasets/
     {%- if dataset.icon -%}
     <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}"/>
     {%- endif -%}
-    <p>
-        <a href="{{ dataset.dataset }}">
-            <svg class="svg-icon" width="100%"><use xlink:href="/assets/minima-social-icons.svg#database"></use></svg>
-            Dataset
-        </a>
-    </p>
+    {%- if dataset.datasets -%}
+    <h4>Datasets</h4>
+    <ul>
+        {%- for dataset in dataset.datasets -%}
+        <li>
+            <a href="{{ dataset.url }}">{{ dataset.name }}</a>
+        </li>
+        {%- endfor -%}
+    </ul>
+    {%- endif -%}
     <p>
         <a href="{{ dataset.code }}">
             <svg class="svg-icon" width="100%"><use xlink:href="/assets/minima-social-icons.svg#code"></use></svg>
