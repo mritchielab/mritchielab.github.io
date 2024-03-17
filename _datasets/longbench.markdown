@@ -1,6 +1,9 @@
 ---
 name: LongBench
-dataset: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE172421
+datasets: 
+    -
+        name: GSE172421
+        url: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE172421
 code: https://github.com/XueyiDong/LongReadBenchmark
 papers:
     - 
