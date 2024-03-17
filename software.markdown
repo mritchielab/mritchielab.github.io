@@ -3,9 +3,17 @@ layout: page
 title: Software
 permalink: /software/
 ---
-
+<div class="software-nav">
 {% for software in site.software %}
-<div class="software-container">
+    <a href="#{{ software.name }}">
+        <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon software-nav-icon" alt="{{ software.name }}"
+        role="button"
+        />
+    </a>
+{% endfor %}
+</div>
+{% for software in site.software %}
+<div class="software-container" id="{{ software.name }}">
     <h2>
         <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon" alt="{{ software.name }}"/>
         {{ software.name }}

@@ -106,3 +106,36 @@ $on-laptop:        800px !default;
   margin-left: auto;
   margin-right: auto;
 }
+
+@media screen and (min-width: 480px) {
+  .software-nav {
+    display: grid;
+    align-items: center;
+    grid-template-columns: repeat(8, 1fr);
+    gap: 0px 30px;
+  }
+}
+
+@media screen and (max-width: 479px) {
+  .software-nav {
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0px 30px;
+  }
+}
+
+.software-nav-icon {
+  transition: all .2s ease-in-out;
+  width: 100%;
+}
+
+.software-nav-icon:hover {
+  opacity: 0.8;
+  transform: scale(1.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
