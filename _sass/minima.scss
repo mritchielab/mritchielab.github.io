@@ -107,22 +107,22 @@ $on-laptop:        800px !default;
   margin-right: auto;
 }
 
-@media screen and (min-width: 480px) {
-  .software-nav {
-    display: grid;
-    align-items: center;
-    grid-template-columns: repeat(8, 1fr);
-    gap: 0px 30px;
-  }
+.software-nav {
+  display: grid;
+  align-items: center;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 0px 10px;
+  padding: 10px;
+  border: 1px solid #e6e6e6;
+  border-radius: 10px;
+  grid-template-columns: repeat(9, 1fr);
 }
 
+// override for smaller screens
 @media screen and (max-width: 479px) {
   .software-nav {
-    display: grid;
-    align-items: center;
-    justify-items: center;
-    grid-template-columns: repeat(4, 1fr);
-    gap: 0px 30px;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0px 40px;
   }
 }
 

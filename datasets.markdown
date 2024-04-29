@@ -13,7 +13,7 @@ permalink: /datasets/
         {{ dataset.name }}
     </h2>
     {%- if dataset.icon -%}
-    <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}"/>
+    <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}" loading="lazy"/>
     {%- endif -%}
     {%- if dataset.datasets -%}
     <h4>Datasets</h4>
