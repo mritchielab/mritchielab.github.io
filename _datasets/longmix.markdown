@@ -1,5 +1,5 @@
 ---
-name: LongBench
+name: LongMix
 datasets: 
     -
         name: GSE172421
