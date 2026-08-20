@@ -13,7 +13,7 @@ datasets:
 code: https://github.com/ashsolano/SpatialBench
 papers:
     - 
-        name: SpatialBench: Comparative cross-platform benchmarking of high-resolution spatial transcriptomics using matched mouse lymphoid tissue
+        name: "SpatialBench: Comparative cross-platform benchmarking of high-resolution spatial transcriptomics using matched mouse lymphoid tissue"
         url: https://www.biorxiv.org/content/10.64898/2026.04.29.721531v1
 icon: spatialbenchhighres.png
 ---
