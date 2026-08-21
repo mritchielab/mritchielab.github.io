@@ -1,6 +1,7 @@
 ---
 name: stPipe
 github: https://github.com/mritchielab/stPipe
+bioconductor: https://bioconductor.org/packages/release/bioc/html/stPipe.html
 papers:
     - 
         name: stPipe&#58; A flexible and streamlined R/Bioconductor pipeline for preprocessing sequencing-based spatial transcriptomics data
