@@ -2,42 +2,34 @@
 layout: default
 ---
 <article class="listing">
-  <header class="listing-header">
-    <h1 class="listing-title">{{ page.title | escape }}</h1>
+  <header class="page-band">
+    <div class="wrapper">
+      <h1 class="listing-title">{{ page.title | escape }}</h1>
+      <nav class="listing-index" aria-label="{{ page.title | escape }}">
+        <ul class="software-nav">
+          {%- for software in site.software -%}
+          <li>
+            <a href="#{{ software.name }}">
+              <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon software-nav-icon" alt="{{ software.name }}" />
+              <span>{{ software.name }}</span>
+            </a>
+          </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+    </div>
   </header>
 
-  <div class="listing-grid">
-    <nav class="listing-index" aria-label="{{ page.title | escape }}">
-      <ul class="software-nav">
-        {%- for software in site.software -%}
-        <li>
-          <a href="#{{ software.name }}">
-            <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon software-nav-icon" alt="{{ software.name }}" />
-            <span>{{ software.name }}</span>
-          </a>
-        </li>
-        {%- endfor -%}
-      </ul>
-    </nav>
-
-    <div class="listing-entries">
+  <div class="wrapper listing-body">
+    <div class="card-grid">
       {%- for software in site.software -%}
-      <section class="entry software-container" id="{{ software.name }}">
+      <section class="entry card software-container" id="{{ software.name }}">
         <div class="entry-side">
           <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon" alt="{{ software.name }}"/>
         </div>
         <div class="entry-main">
           <h2 class="entry-title">{{ software.name }}</h2>
           <p class="entry-desc">{{ software.description }}</p>
-          <p class="entry-links">
-            <a href="{{ software.github }}">
-              <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg>
-              Github
-            </a>
-            {%- if software.bioconductor -%}
-            <a href="{{ software.bioconductor }}"><img src="/assets/images/bioc.png" class="software-link-icon" alt=""/> Bioconductor</a>
-            {%- endif -%}
-          </p>
           {%- if software.papers -%}
           <h4>Publications</h4>
           <ul class="entry-papers">
@@ -47,6 +39,15 @@ layout: default
           </ul>
           {%- endif -%}
         </div>
+        <p class="entry-links">
+          <a class="btn" href="{{ software.github }}">
+            <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg>
+            Github
+          </a>
+          {%- if software.bioconductor -%}
+          <a class="btn btn-outline" href="{{ software.bioconductor }}"><img src="/assets/images/bioc.png" class="software-link-icon" alt=""/> Bioconductor</a>
+          {%- endif -%}
+        </p>
       </section>
       {%- endfor -%}
     </div>

@@ -2,38 +2,45 @@
 
 // Define defaults for each variable.
 
-$base-font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !default;
+$base-font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
 $heading-font-family: "Source Serif 4", Georgia, "Times New Roman", serif !default;
 $base-font-size:   17px !default;
 $base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
 $base-line-height: 1.6 !default;
 
-// spacing scale: 4 / 8 / 16 / 24 / 40
+// spacing scale
 $space-1: 4px;
 $space-2: 8px;
 $space-3: 16px;
 $space-4: 24px;
 $space-5: 40px;
+$space-6: 64px;
 
 $spacing-unit:     $space-4 !default;
 
-$text-color:       #1f2328 !default;
+$text-color:       #333333 !default;
 $text-hovor-color: #57606a !default;
 
-$background-color: #fcfcfb !default;
-// single accent colour (deep academic blue)
-$brand-color:      #1f4e8c !default;
+$background-color: #ffffff !default;
 
-$grey-color:       #57606a !default;          // secondary text, AA on background
-$grey-color-light: #d0d7de !default;          // rules and borders
-$grey-color-dark:  #1f2328 !default;
+// Institute-style palette
+$brand-color:      #2366b9 !default;   // primary blue
+$brand-dark:       #153a69;            // hover
+$tint-blue:        #deeaff;            // hero / page bands
+$tint-grey:        #f4f4f2;            // cards
+$ink-dark:         #1e1e1e;            // footer
+
+$grey-color:       #5a5a5a !default;
+$grey-color-light: #dddddd !default;
+$grey-color-dark:  #1e1e1e !default;
 
 $table-text-align: left !default;
 
-// Width of the page frame; text measure is limited separately (~70 characters)
-$content-width:    1040px !default;
+$content-width:    1280px !default;
 $measure:          68ch;
+$radius:           24px;
+$pill:             300px;
 
 $on-palm:          600px !default;
 $on-laptop:        800px !default;
@@ -56,10 +63,10 @@ $on-laptop:        800px !default;
 ;
 
 // ---------------------------------------------------------------
-// Ritchie lab academic styling (presentation only)
+// Ritchie lab styling in the style of a research-institute site
 // ---------------------------------------------------------------
 
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
 
 body {
   font-family: $base-font-family;
@@ -70,24 +77,24 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-// ---- headings: serif, dark neutral, clear scale ----
+// ---- typography ----
 h1, h2, h3, h4, h5, h6 {
   font-family: $heading-font-family;
   font-weight: 600;
-  color: $text-color;
-  line-height: 1.25;
-  letter-spacing: 0;
+  color: $ink-dark;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-h1, .post-title, .listing-title { font-size: 2rem; margin-bottom: $space-4; line-height: 1.2; letter-spacing: 0; }
+h1, .post-title, .listing-title { font-size: 2.75rem; margin-bottom: $space-4; }
 h2 { font-size: 1.5rem; margin-bottom: $space-3; }
 h3 { font-size: 1.2rem; margin-bottom: $space-2; }
 h4 {
   font-family: $base-font-family;
-  font-size: 0.8125rem;
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.06em;
+  letter-spacing: 0.08em;
   color: $grey-color;
   margin: $space-3 0 $space-2;
 }
@@ -95,236 +102,189 @@ h4 {
 p, ul, ol { margin-bottom: $space-3; }
 ul, ol { margin-left: $space-4; }
 
-// ---- links: one accent colour, underline on hover ----
 a {
   color: $brand-color;
   text-decoration: none;
 
   &:visited { color: $brand-color; }
-  &:hover { color: darken($brand-color, 10%); text-decoration: underline; }
+  &:hover { color: $brand-dark; text-decoration: underline; }
   &:focus-visible {
-    outline: 2px solid $brand-color;
+    outline: 3px solid $brand-color;
     outline-offset: 2px;
-    border-radius: 2px;
+    border-radius: 4px;
   }
 }
 
-// ---- page frame ----
+// ---- frame ----
 .wrapper {
   max-width: $content-width;
-  padding-left: $space-4;
-  padding-right: $space-4;
+  padding-left: $space-5;
+  padding-right: $space-5;
 
   @include media-query($on-laptop) {
     max-width: none;
+    padding-left: $space-4;
+    padding-right: $space-4;
+  }
+  @include media-query($on-palm) {
     padding-left: $space-3;
     padding-right: $space-3;
   }
 }
 
-.page-content { padding: $space-5 0; }
+.page-content { padding: 0; }
+main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 
-// ---- header: simple, thin rule, not sticky ----
+// ---- header ----
 .site-header {
   border-top: 0;
   border-bottom: 1px solid $grey-color-light;
   min-height: 0;
-  padding: $space-2 0;
-  background: $background-color;
+  padding: $space-3 0;
+  background: #fff;
   position: relative;
 }
 
 .site-title {
   font-family: $heading-font-family;
-  font-size: 1.35rem;
+  font-size: 1.6rem;
   font-weight: 600;
-  letter-spacing: 0;
-  line-height: 2.4rem;
+  letter-spacing: -0.01em;
+  line-height: 2.5rem;
 
-  &, &:visited { color: $text-color; }
+  &, &:visited { color: $ink-dark; }
   &:hover { color: $brand-color; text-decoration: none; }
 }
 
 .site-nav {
-  line-height: 2.4rem;
+  line-height: 2.5rem;
 
   .page-link {
-    font-size: 1rem;
-    color: $text-color;
-    line-height: 1.6;
-    padding: $space-1 0;
-    border-bottom: 2px solid transparent;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: $ink-dark;
+    line-height: 1.4;
+    padding: $space-2 $space-3;
+    border-radius: $pill;
+    border: 0;
 
-    &:not(:last-child) { margin-right: $space-4; }
-    &:hover { color: $brand-color; text-decoration: none; border-bottom-color: $grey-color-light; }
+    &:not(:last-child) { margin-right: $space-2; }
+    &:hover { background: $tint-grey; color: $ink-dark; text-decoration: none; }
   }
 }
 
 .selected-page {
-  color: $brand-color !important;
+  background: $tint-blue;
+  color: $brand-dark !important;
   font-weight: 600;
-  border-bottom-color: $brand-color !important;
 }
 
-// ---- about page: figure on the left, text on the right ----
+// ---- buttons (pills) ----
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 9px $space-3;
+  border: 1px solid $brand-color;
+  border-radius: $pill;
+  background: $brand-color;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+
+  &:visited { color: #fff; }
+  &:hover { background: $brand-dark; border-color: $brand-dark; color: #fff; text-decoration: none; }
+  .svg-icon { fill: #fff; }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $brand-color;
+  &:visited { color: $brand-color; }
+  &:hover { background: $brand-color; color: #fff; }
+}
+
+// ---- about: hero band ----
+.hero {
+  background: $tint-blue;
+  padding: $space-6 0;
+
+  @include media-query($on-laptop) { padding: $space-5 0; }
+}
+
 .about-body {
   display: grid;
-  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
-  gap: $space-5;
-  align-items: start;
-  padding-top: $space-4;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: $space-6;
+  align-items: center;
 
-  .about-logo {
+  p {
     grid-column: 1;
     grid-row: 1;
+    font-family: $heading-font-family;
+    font-size: 1.75rem;
+    line-height: 1.45;
+    color: $ink-dark;
+    margin: 0;
+  }
+
+  .about-logo {
+    grid-column: 2;
+    grid-row: 1;
+    display: block;
     width: 100%;
     max-width: none;
     height: auto;
     margin: 0;
-    padding: 0;
-    border: 1px solid $grey-color-light;
+    padding: $space-4;
     background: #fff;
-  }
-
-  p {
-    grid-column: 2;
-    grid-row: 1;
-    font-family: $heading-font-family;
-    font-size: 1.2rem;
-    line-height: 1.65;
-    max-width: $measure;
-    margin: 0;
+    border-radius: $radius;
   }
 
   @include media-query($on-laptop) {
     grid-template-columns: minmax(0, 1fr);
     gap: $space-4;
-    .about-logo, p { grid-column: 1; }
-    p { grid-row: 2; font-size: 1.1rem; }
+    p { grid-column: 1; grid-row: 2; font-size: 1.3rem; }
+    .about-logo { grid-column: 1; grid-row: 1; padding: $space-3; }
   }
 }
 
-// ---- listing pages (software, datasets) ----
-.listing-header {
-  border-bottom: 1px solid $grey-color-light;
-  margin-bottom: $space-4;
-  .listing-title { margin-bottom: $space-3; }
+// ---- listing pages: tinted title band, then card grid ----
+.page-band {
+  background: $tint-blue;
+  padding: $space-6 0 $space-5;
+
+  .listing-title { margin-bottom: $space-4; }
+  @include media-query($on-laptop) { padding: $space-5 0 $space-4; }
 }
 
-.listing-grid {
-  display: grid;
-  grid-template-columns: 200px minmax(0, 1fr);
-  gap: $space-5;
-  align-items: start;
-
-  @include media-query($on-laptop) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: $space-4;
-  }
-}
-
-// index of software (left column, stays in view on wide screens)
-.listing-index {
-  position: sticky;
-  top: $space-3;
-
-  @include media-query($on-laptop) { position: static; }
-}
+.listing-body { padding-top: $space-5; padding-bottom: $space-6; }
 
 .software-nav {
   list-style: none;
   margin: 0;
   padding: 0;
-  display: block;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
 
   li { margin: 0; }
 
   a {
-    display: flex;
-    align-items: center;
-    gap: $space-2;
-    padding: $space-1 $space-2;
-    border-left: 2px solid transparent;
-    color: $text-color;
-    font-size: 0.9375rem;
-
-    &:hover { color: $brand-color; border-left-color: $brand-color; text-decoration: none; }
-  }
-
-  @include media-query($on-laptop) {
-    display: grid;
-    grid-template-columns: repeat(3, minmax(0, 1fr));
-    gap: $space-1 $space-3;
-    padding: $space-3 0;
-    border-top: 1px solid $grey-color-light;
-    border-bottom: 1px solid $grey-color-light;
-  }
-  @include media-query(479px) {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-.software-nav-icon {
-  width: 24px;
-  height: 24px;
-  padding: 0;
-  object-fit: contain;
-  flex: none;
-}
-
-// entries: two columns (icon/figure | text) separated by thin rules
-.entry {
-  display: grid;
-  grid-template-columns: 72px minmax(0, 1fr);
-  gap: $space-4;
-  border: 0;
-  border-top: 1px solid $grey-color-light;
-  border-radius: 0;
-  background: transparent;
-  box-shadow: none;
-  padding: $space-4 0 $space-2;
-  margin: 0;
-  scroll-margin-top: $space-3;
-
-  &:first-child { border-top: 0; padding-top: 0; }
-
-  @include media-query($on-palm) {
-    grid-template-columns: minmax(0, 1fr);
-    gap: $space-2;
-  }
-}
-
-.entry-main {
-  min-width: 0;
-  .entry-title { margin-bottom: $space-2; }
-  .entry-desc { max-width: $measure; margin-bottom: $space-3; }
-}
-
-.entry-papers {
-  list-style: none;
-  margin: 0 0 $space-3;
-  max-width: $measure;
-  li { margin-bottom: $space-2; }
-}
-
-// small outlined tags for GitHub / Bioconductor / Analysis Code
-.entry-links {
-  display: flex;
-  flex-wrap: wrap;
-  gap: $space-2;
-  margin-bottom: $space-3;
-
-  a {
     display: inline-flex;
     align-items: center;
-    gap: $space-1;
-    font-size: 0.875rem;
-    padding: $space-1 $space-2;
-    border: 1px solid $grey-color-light;
-    border-radius: 3px;
+    gap: $space-2;
+    padding: $space-1 $space-3 $space-1 $space-2;
+    border-radius: $pill;
     background: #fff;
+    border: 1px solid transparent;
+    color: $ink-dark;
+    font-size: 0.875rem;
+    font-weight: 500;
 
-    &:hover { border-color: $brand-color; text-decoration: none; }
+    &:hover { border-color: $brand-color; color: $brand-color; text-decoration: none; }
   }
 }
 
@@ -333,10 +293,75 @@ a {
   height: 56px;
   padding: 0;
   object-fit: contain;
-  object-position: left top;
+  object-position: left center;
 }
 
 .software-nav .software-package-icon { width: 24px; height: 24px; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-4;
+
+  @include media-query(1024px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include media-query($on-palm) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.card-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  @include media-query($on-laptop) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  background: $tint-grey;
+  border: 0;
+  border-radius: $radius;
+  box-shadow: none;
+  padding: $space-4;
+  margin: 0;
+  scroll-margin-top: $space-4;
+}
+
+.entry-side { margin-bottom: $space-3; }
+
+.entry-figure {
+  margin: (-$space-4) (-$space-4) $space-3;
+  border-radius: $radius $radius 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dataset-icon {
+  display: block;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  padding: $space-3;
+  margin: 0;
+  background: #fff;
+}
+
+.entry-main {
+  flex: 1;
+  min-width: 0;
+  .entry-title { margin-bottom: $space-2; }
+  .entry-desc { margin-bottom: $space-3; }
+}
+
+.entry-papers {
+  list-style: none;
+  margin: 0 0 $space-3;
+  li { margin-bottom: $space-2; font-size: 0.9375rem; }
+}
+
+.entry-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin: $space-2 0 0;
+}
 
 .software-link-icon {
   width: 16px;
@@ -352,48 +377,47 @@ a {
   fill: $grey-color;
 }
 
-// datasets: figure column on the left, details on the right
-.listing-entries-wide .entry {
-  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
-
-  @include media-query($on-palm) { grid-template-columns: minmax(0, 1fr); }
-}
-
-.dataset-icon {
-  display: block;
-  width: 100%;
-  aspect-ratio: 4 / 3;
-  object-fit: contain;
-  padding: 0;
-  margin: 0;
-  background: #fff;
-  border: 1px solid $grey-color-light;
-}
-
-// ---- footer: small grey text ----
+// ---- footer: dark institute footer ----
 .site-footer {
-  border-top: 1px solid $grey-color-light;
-  padding: $space-4 0;
-  margin-top: $space-4;
+  background: $ink-dark;
+  color: #e7e6e5;
+  border-top: 0;
+  padding: $space-5 0;
 }
 
 .footer-col-wrapper {
-  font-size: 0.875rem;
-  color: $grey-color;
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: $space-5;
+  margin-left: 0;
+  font-size: 0.9375rem;
+  color: #e7e6e5;
+
+  &::after { display: none; }
+
+  @include media-query($on-laptop) { grid-template-columns: minmax(0, 1fr); gap: $space-3; }
 }
 
-.footer-col { margin-bottom: $space-2; }
-.contact-list, .social-media-list { margin-bottom: 0; }
-.site-footer a { color: $grey-color; text-decoration: underline; }
-.site-footer a:hover { color: $brand-color; }
+.footer-col {
+  float: none;
+  width: auto;
+  padding-left: 0;
+  margin: 0;
+}
+
+.contact-list, .social-media-list { margin: 0; }
+.contact-list li:first-child { font-family: $heading-font-family; font-size: 1.2rem; color: #fff; }
+.footer-col p { margin: 0; }
+.site-footer a { color: #fff; text-decoration: underline; &:visited { color: #fff; } &:hover { color: $tint-blue; } }
+.site-footer .svg-icon { fill: #fff; }
+.site-footer a:focus-visible { outline-color: #fff; }
 
 // ---- small screens ----
 @include media-query($on-palm) {
-  h1, .post-title, .listing-title { font-size: 1.75rem; }
-  .page-content { padding: $space-4 0; }
+  h1, .post-title, .listing-title { font-size: 2rem; }
+  .about-body p { font-size: 1.15rem; }
 }
 
-html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
 }

@@ -2,44 +2,48 @@
 layout: default
 ---
 <article class="listing">
-  <header class="listing-header">
-    <h1 class="listing-title">{{ page.title | escape }}</h1>
+  <header class="page-band">
+    <div class="wrapper">
+      <h1 class="listing-title">{{ page.title | escape }}</h1>
+    </div>
   </header>
 
-  <div class="listing-entries listing-entries-wide">
-    {%- for dataset in site.datasets -%}
-    <section class="entry datasets-container">
-      {%- if dataset.icon -%}
-      <div class="entry-side entry-figure">
-        <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}" loading="lazy"/>
-      </div>
-      {%- endif -%}
-      <div class="entry-main">
-        <h2 class="entry-title">{{ dataset.name }}</h2>
-        {%- if dataset.datasets -%}
-        <h4>Datasets</h4>
-        <ul class="entry-papers">
-          {%- for ds in dataset.datasets -%}
-          <li><a href="{{ ds.url }}">{{ ds.name }}</a></li>
-          {%- endfor -%}
-        </ul>
+  <div class="wrapper listing-body">
+    <div class="card-grid card-grid-2">
+      {%- for dataset in site.datasets -%}
+      <section class="entry card datasets-container">
+        {%- if dataset.icon -%}
+        <div class="entry-figure">
+          <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}" loading="lazy"/>
+        </div>
         {%- endif -%}
+        <div class="entry-main">
+          <h2 class="entry-title">{{ dataset.name }}</h2>
+          {%- if dataset.datasets -%}
+          <h4>Datasets</h4>
+          <ul class="entry-papers">
+            {%- for ds in dataset.datasets -%}
+            <li><a href="{{ ds.url }}">{{ ds.name }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+          {%- if dataset.papers -%}
+          <h4>Publications</h4>
+          <ul class="entry-papers">
+            {%- for paper in dataset.papers -%}
+            <li><a href="{{ paper.url }}">{{ paper.name }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
         <p class="entry-links">
-          <a href="{{ dataset.code }}">
+          <a class="btn" href="{{ dataset.code }}">
             <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#code"></use></svg>
             Analysis Code
           </a>
         </p>
-        {%- if dataset.papers -%}
-        <h4>Publications</h4>
-        <ul class="entry-papers">
-          {%- for paper in dataset.papers -%}
-          <li><a href="{{ paper.url }}">{{ paper.name }}</a></li>
-          {%- endfor -%}
-        </ul>
-        {%- endif -%}
-      </div>
-    </section>
-    {%- endfor -%}
+      </section>
+      {%- endfor -%}
+    </div>
   </div>
 </article>
