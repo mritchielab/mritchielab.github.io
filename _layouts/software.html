@@ -1,0 +1,54 @@
+---
+layout: default
+---
+<article class="listing">
+  <header class="listing-header">
+    <h1 class="listing-title">{{ page.title | escape }}</h1>
+  </header>
+
+  <div class="listing-grid">
+    <nav class="listing-index" aria-label="{{ page.title | escape }}">
+      <ul class="software-nav">
+        {%- for software in site.software -%}
+        <li>
+          <a href="#{{ software.name }}">
+            <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon software-nav-icon" alt="{{ software.name }}" />
+            <span>{{ software.name }}</span>
+          </a>
+        </li>
+        {%- endfor -%}
+      </ul>
+    </nav>
+
+    <div class="listing-entries">
+      {%- for software in site.software -%}
+      <section class="entry software-container" id="{{ software.name }}">
+        <div class="entry-side">
+          <img src="/assets/images/software/{{ software.icon }}" class="software-package-icon" alt="{{ software.name }}"/>
+        </div>
+        <div class="entry-main">
+          <h2 class="entry-title">{{ software.name }}</h2>
+          <p class="entry-desc">{{ software.description }}</p>
+          <p class="entry-links">
+            <a href="{{ software.github }}">
+              <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#github"></use></svg>
+              Github
+            </a>
+            {%- if software.bioconductor -%}
+            <a href="{{ software.bioconductor }}"><img src="/assets/images/bioc.png" class="software-link-icon" alt=""/> Bioconductor</a>
+            {%- endif -%}
+          </p>
+          {%- if software.papers -%}
+          <h4>Publications</h4>
+          <ul class="entry-papers">
+            {%- for paper in software.papers -%}
+            <li><a href="{{ paper.url }}">{{ paper.name }}</a></li>
+            {%- endfor -%}
+          </ul>
+          {%- endif -%}
+        </div>
+      </section>
+      {%- endfor -%}
+    </div>
+  </div>
+</article>

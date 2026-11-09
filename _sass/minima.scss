@@ -2,39 +2,42 @@
 
 // Define defaults for each variable.
 
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$base-font-size:   16px !default;
-$base-font-weight: 300 !default;
+$base-font-family: "Source Sans 3", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !default;
+$heading-font-family: "Source Serif 4", Georgia, "Times New Roman", serif !default;
+$base-font-size:   17px !default;
+$base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+$base-line-height: 1.6 !default;
 
-$spacing-unit:     30px !default;
+// spacing scale: 4 / 8 / 16 / 24 / 40
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 16px;
+$space-4: 24px;
+$space-5: 40px;
 
-$text-color:       #343333 !default;
-$text-hovor-color:   rgb(190, 190, 190) !default;
+$spacing-unit:     $space-4 !default;
 
-$background-color: #fdfdfd !default;
-$brand-color:      #9f47ed !default;
+$text-color:       #1f2328 !default;
+$text-hovor-color: #57606a !default;
 
-$grey-color:       #828282 !default;
-$grey-color-light: lighten($grey-color, 40%) !default;
-$grey-color-dark:  darken($grey-color, 25%) !default;
+$background-color: #fcfcfb !default;
+// single accent colour (deep academic blue)
+$brand-color:      #1f4e8c !default;
+
+$grey-color:       #57606a !default;          // secondary text, AA on background
+$grey-color-light: #d0d7de !default;          // rules and borders
+$grey-color-dark:  #1f2328 !default;
 
 $table-text-align: left !default;
 
-// Width of the content area
-$content-width:    800px !default;
+// Width of the page frame; text measure is limited separately (~70 characters)
+$content-width:    1040px !default;
+$measure:          68ch;
 
 $on-palm:          600px !default;
 $on-laptop:        800px !default;
 
-// Use media queries like this:
-// @include media-query($on-palm) {
-//   .wrapper {
-//     padding-right: $spacing-unit / 2;
-//     padding-left: $spacing-unit / 2;
-//   }
-// }
 @mixin media-query($device) {
   @media screen and (max-width: $device) {
     @content;
@@ -52,209 +55,345 @@ $on-laptop:        800px !default;
   "minima/syntax-highlighting"
 ;
 
-// custom ritchie lab CSS
+// ---------------------------------------------------------------
+// Ritchie lab academic styling (presentation only)
+// ---------------------------------------------------------------
+
+html { -webkit-text-size-adjust: 100%; }
+
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  background: $background-color;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
+}
+
+// ---- headings: serif, dark neutral, clear scale ----
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font-family;
+  font-weight: 600;
+  color: $text-color;
+  line-height: 1.25;
+  letter-spacing: 0;
+}
+
+h1, .post-title, .listing-title { font-size: 2rem; margin-bottom: $space-4; line-height: 1.2; letter-spacing: 0; }
+h2 { font-size: 1.5rem; margin-bottom: $space-3; }
+h3 { font-size: 1.2rem; margin-bottom: $space-2; }
+h4 {
+  font-family: $base-font-family;
+  font-size: 0.8125rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: $grey-color;
+  margin: $space-3 0 $space-2;
+}
+
+p, ul, ol { margin-bottom: $space-3; }
+ul, ol { margin-left: $space-4; }
+
+// ---- links: one accent colour, underline on hover ----
+a {
+  color: $brand-color;
+  text-decoration: none;
+
+  &:visited { color: $brand-color; }
+  &:hover { color: darken($brand-color, 10%); text-decoration: underline; }
+  &:focus-visible {
+    outline: 2px solid $brand-color;
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+}
+
+// ---- page frame ----
+.wrapper {
+  max-width: $content-width;
+  padding-left: $space-4;
+  padding-right: $space-4;
+
+  @include media-query($on-laptop) {
+    max-width: none;
+    padding-left: $space-3;
+    padding-right: $space-3;
+  }
+}
+
+.page-content { padding: $space-5 0; }
+
+// ---- header: simple, thin rule, not sticky ----
+.site-header {
+  border-top: 0;
+  border-bottom: 1px solid $grey-color-light;
+  min-height: 0;
+  padding: $space-2 0;
+  background: $background-color;
+  position: relative;
+}
+
+.site-title {
+  font-family: $heading-font-family;
+  font-size: 1.35rem;
+  font-weight: 600;
+  letter-spacing: 0;
+  line-height: 2.4rem;
+
+  &, &:visited { color: $text-color; }
+  &:hover { color: $brand-color; text-decoration: none; }
+}
+
+.site-nav {
+  line-height: 2.4rem;
+
+  .page-link {
+    font-size: 1rem;
+    color: $text-color;
+    line-height: 1.6;
+    padding: $space-1 0;
+    border-bottom: 2px solid transparent;
+
+    &:not(:last-child) { margin-right: $space-4; }
+    &:hover { color: $brand-color; text-decoration: none; border-bottom-color: $grey-color-light; }
+  }
+}
 
 .selected-page {
   color: $brand-color !important;
+  font-weight: 600;
+  border-bottom-color: $brand-color !important;
 }
 
-.nav-ritchie-lab-logo {
-  width: 180px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+// ---- about page: figure on the left, text on the right ----
+.about-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, 1fr);
+  gap: $space-5;
+  align-items: start;
+  padding-top: $space-4;
+
+  .about-logo {
+    grid-column: 1;
+    grid-row: 1;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+    border: 1px solid $grey-color-light;
+    background: #fff;
+  }
+
+  p {
+    grid-column: 2;
+    grid-row: 1;
+    font-family: $heading-font-family;
+    font-size: 1.2rem;
+    line-height: 1.65;
+    max-width: $measure;
+    margin: 0;
+  }
+
+  @include media-query($on-laptop) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-4;
+    .about-logo, p { grid-column: 1; }
+    p { grid-row: 2; font-size: 1.1rem; }
+  }
 }
 
-.about-logo {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+// ---- listing pages (software, datasets) ----
+.listing-header {
+  border-bottom: 1px solid $grey-color-light;
+  margin-bottom: $space-4;
+  .listing-title { margin-bottom: $space-3; }
 }
 
-.software-package-icon {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 60px;
-  padding-right: 10px;
+.listing-grid {
+  display: grid;
+  grid-template-columns: 200px minmax(0, 1fr);
+  gap: $space-5;
+  align-items: start;
+
+  @include media-query($on-laptop) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-4;
+  }
 }
 
-.software-link-icon {
-  padding-right: 5px;
-  width: 18px;
-}
+// index of software (left column, stays in view on wide screens)
+.listing-index {
+  position: sticky;
+  top: $space-3;
 
-.software-container {
-  border: 1px solid lighten($text-color, 70%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;;
-}
-
-.datasets-container {
-  border: 1px solid lighten($text-color, 70%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;;
-}
-
-.dataset-icon {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
+  @include media-query($on-laptop) { position: static; }
 }
 
 .software-nav {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 0px 10px;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 10px;
-  grid-template-columns: repeat(9, 1fr);
-}
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: block;
 
-// override for smaller screens
-@media screen and (max-width: 479px) {
-  .software-nav {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0px 40px;
+  li { margin: 0; }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-1 $space-2;
+    border-left: 2px solid transparent;
+    color: $text-color;
+    font-size: 0.9375rem;
+
+    &:hover { color: $brand-color; border-left-color: $brand-color; text-decoration: none; }
+  }
+
+  @include media-query($on-laptop) {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: $space-1 $space-3;
+    padding: $space-3 0;
+    border-top: 1px solid $grey-color-light;
+    border-bottom: 1px solid $grey-color-light;
+  }
+  @include media-query(479px) {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 
 .software-nav-icon {
-  transition: all .2s ease-in-out;
-  width: 100%;
+  width: 24px;
+  height: 24px;
+  padding: 0;
+  object-fit: contain;
+  flex: none;
 }
 
-.software-nav-icon:hover {
-  opacity: 0.8;
-  transform: scale(1.1);
-}
+// entries: two columns (icon/figure | text) separated by thin rules
+.entry {
+  display: grid;
+  grid-template-columns: 72px minmax(0, 1fr);
+  gap: $space-4;
+  border: 0;
+  border-top: 1px solid $grey-color-light;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  padding: $space-4 0 $space-2;
+  margin: 0;
+  scroll-margin-top: $space-3;
 
-html {
-  scroll-behavior: smooth;
-}
+  &:first-child { border-top: 0; padding-top: 0; }
 
-// ---- visual polish (styling only; no content changes) ----
-
-body {
-  background: linear-gradient(180deg, #f6f0fd 0%, $background-color 320px);
-  background-attachment: fixed;
-  -webkit-font-smoothing: antialiased;
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 100;
-  background: rgba(255, 255, 255, 0.85);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border-top: 5px solid $brand-color;
-  box-shadow: 0 2px 12px rgba(80, 40, 130, 0.08);
-}
-
-.site-title {
-  font-weight: 600;
-  background: linear-gradient(90deg, #4a1d82, $brand-color);
-  -webkit-background-clip: text;
-  background-clip: text;
-  -webkit-text-fill-color: transparent;
-  transition: opacity .2s ease;
-
-  &:hover { opacity: 0.8; text-decoration: none; }
-}
-
-.site-nav .page-link {
-  position: relative;
-  font-weight: 400;
-  transition: color .2s ease;
-
-  &::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: -2px;
-    width: 100%;
-    height: 2px;
-    background: $brand-color;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: transform .25s ease;
-  }
-  &:hover { color: $brand-color; text-decoration: none; }
-  &:hover::after,
-  &.selected-page::after { transform: scaleX(1); }
-}
-
-.page-content h1, .page-content h2 {
-  letter-spacing: -0.5px;
-}
-
-.about-logo {
-  max-width: 100%;
-  height: auto;
-  border-radius: 16px;
-  box-shadow: 0 8px 30px rgba(80, 40, 130, 0.15);
-}
-
-.software-container,
-.datasets-container {
-  background: #fff;
-  border: 1px solid rgba(159, 71, 237, 0.15);
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
-  transition: transform .25s ease, box-shadow .25s ease, border-color .25s ease;
-  scroll-margin-top: 90px;
-
-  &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(80, 40, 130, 0.14);
-    border-color: rgba(159, 71, 237, 0.45);
-  }
-
-  h2 { color: #4a1d82; }
-  h4 {
-    display: inline-block;
-    border-bottom: 2px solid $brand-color;
-    padding-bottom: 2px;
+  @include media-query($on-palm) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-2;
   }
 }
 
-.software-nav {
-  background: #fff;
-  border: 1px solid rgba(159, 71, 237, 0.15);
-  border-radius: 14px;
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+.entry-main {
+  min-width: 0;
+  .entry-title { margin-bottom: $space-2; }
+  .entry-desc { max-width: $measure; margin-bottom: $space-3; }
 }
 
-.software-nav-icon:hover {
-  opacity: 1;
-  transform: scale(1.15) translateY(-2px);
-  filter: drop-shadow(0 4px 6px rgba(80, 40, 130, 0.3));
+.entry-papers {
+  list-style: none;
+  margin: 0 0 $space-3;
+  max-width: $measure;
+  li { margin-bottom: $space-2; }
+}
+
+// small outlined tags for GitHub / Bioconductor / Analysis Code
+.entry-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin-bottom: $space-3;
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-1;
+    font-size: 0.875rem;
+    padding: $space-1 $space-2;
+    border: 1px solid $grey-color-light;
+    border-radius: 3px;
+    background: #fff;
+
+    &:hover { border-color: $brand-color; text-decoration: none; }
+  }
+}
+
+.software-package-icon {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  object-fit: contain;
+  object-position: left top;
+}
+
+.software-nav .software-package-icon { width: 24px; height: 24px; }
+
+.software-link-icon {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  object-fit: contain;
+}
+
+.svg-icon {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  fill: $grey-color;
+}
+
+// datasets: figure column on the left, details on the right
+.listing-entries-wide .entry {
+  grid-template-columns: minmax(0, 320px) minmax(0, 1fr);
+
+  @include media-query($on-palm) { grid-template-columns: minmax(0, 1fr); }
 }
 
 .dataset-icon {
-  border-radius: 10px;
-  transition: transform .3s ease;
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: contain;
+  padding: 0;
+  margin: 0;
+  background: #fff;
+  border: 1px solid $grey-color-light;
 }
-.software-container:hover .dataset-icon { transform: scale(1.02); }
 
-.page-content a {
-  transition: color .2s ease;
-  &:hover { color: darken($brand-color, 15%); }
-}
-
+// ---- footer: small grey text ----
 .site-footer {
-  border-top: 1px solid rgba(159, 71, 237, 0.2);
+  border-top: 1px solid $grey-color-light;
+  padding: $space-4 0;
+  margin-top: $space-4;
 }
 
+.footer-col-wrapper {
+  font-size: 0.875rem;
+  color: $grey-color;
+}
+
+.footer-col { margin-bottom: $space-2; }
+.contact-list, .social-media-list { margin-bottom: 0; }
+.site-footer a { color: $grey-color; text-decoration: underline; }
+.site-footer a:hover { color: $brand-color; }
+
+// ---- small screens ----
+@include media-query($on-palm) {
+  h1, .post-title, .listing-title { font-size: 1.75rem; }
+  .page-content { padding: $space-4 0; }
+}
+
+html { scroll-behavior: smooth; }
 @media (prefers-reduced-motion: reduce) {
-  * { transition: none !important; scroll-behavior: auto !important; }
-  .software-container:hover, .datasets-container:hover { transform: none; }
+  html { scroll-behavior: auto; }
 }
