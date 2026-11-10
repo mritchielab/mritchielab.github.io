@@ -2,39 +2,49 @@
 
 // Define defaults for each variable.
 
-$base-font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol" !default;
-$base-font-size:   16px !default;
-$base-font-weight: 300 !default;
+$base-font-family: "Inter", "Helvetica Neue", Helvetica, Arial, sans-serif !default;
+$heading-font-family: "Source Serif 4", Georgia, "Times New Roman", serif !default;
+$base-font-size:   17px !default;
+$base-font-weight: 400 !default;
 $small-font-size:  $base-font-size * 0.875 !default;
-$base-line-height: 1.5 !default;
+$base-line-height: 1.6 !default;
 
-$spacing-unit:     30px !default;
+// spacing scale
+$space-1: 4px;
+$space-2: 8px;
+$space-3: 16px;
+$space-4: 24px;
+$space-5: 40px;
+$space-6: 64px;
 
-$text-color:       #343333 !default;
-$text-hovor-color:   rgb(190, 190, 190) !default;
+$spacing-unit:     $space-4 !default;
 
-$background-color: #fdfdfd !default;
-$brand-color:      #9f47ed !default;
+$text-color:       #333333 !default;
+$text-hovor-color: #57606a !default;
 
-$grey-color:       #828282 !default;
-$grey-color-light: lighten($grey-color, 40%) !default;
-$grey-color-dark:  darken($grey-color, 25%) !default;
+$background-color: #ffffff !default;
+
+// Palette taken from the lab logo (black lettering, tomato-sauce red, pineapple/apple cream)
+$brand-color:      #b5292d !default;   // logo red (links, buttons; AA on white and cream)
+$brand-dark:       #7f1d1d;            // hover
+$tint-cream:       #fbf4cf;            // hero / page bands (logo cream)
+$tint-grey:        #f6f3e8;            // cards (warm off-white)
+$ink-dark:         #111111;            // headings, footer (logo black)
+
+$grey-color:       #5a5a5a !default;
+$grey-color-light: #e2dccb !default;   // warm rule colour
+$grey-color-dark:  #111111 !default;
 
 $table-text-align: left !default;
 
-// Width of the content area
-$content-width:    800px !default;
+$content-width:    1280px !default;
+$measure:          68ch;
+$radius:           24px;
+$pill:             300px;
 
 $on-palm:          600px !default;
 $on-laptop:        800px !default;
 
-// Use media queries like this:
-// @include media-query($on-palm) {
-//   .wrapper {
-//     padding-right: $spacing-unit / 2;
-//     padding-left: $spacing-unit / 2;
-//   }
-// }
 @mixin media-query($device) {
   @media screen and (max-width: $device) {
     @content;
@@ -52,90 +62,390 @@ $on-laptop:        800px !default;
   "minima/syntax-highlighting"
 ;
 
-// custom ritchie lab CSS
+// ---------------------------------------------------------------
+// Ritchie lab styling in the style of a research-institute site
+// ---------------------------------------------------------------
 
-.selected-page {
-  color: $brand-color !important;
+html { -webkit-text-size-adjust: 100%; scroll-behavior: smooth; }
+
+body {
+  font-family: $base-font-family;
+  font-size: $base-font-size;
+  line-height: $base-line-height;
+  background: $background-color;
+  color: $text-color;
+  -webkit-font-smoothing: antialiased;
 }
 
-.nav-ritchie-lab-logo {
-  width: 180px;
-  padding-top: 5px;
-  padding-bottom: 5px;
+// ---- typography ----
+h1, h2, h3, h4, h5, h6 {
+  font-family: $heading-font-family;
+  font-weight: 600;
+  color: $ink-dark;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
 }
 
-.about-logo {
-  display: block;
-  margin-right: auto;
-  margin-left: auto;
-  padding-top: 10px;
-  padding-bottom: 10px;
+h1, .post-title, .listing-title { font-size: 2.75rem; margin-bottom: $space-4; }
+h2 { font-size: 1.5rem; margin-bottom: $space-3; }
+h3 { font-size: 1.2rem; margin-bottom: $space-2; }
+h4 {
+  font-family: $base-font-family;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: $grey-color;
+  margin: $space-3 0 $space-2;
 }
 
-.software-package-icon {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 60px;
-  padding-right: 10px;
-}
+p, ul, ol { margin-bottom: $space-3; }
+ul, ol { margin-left: $space-4; }
 
-.software-link-icon {
-  padding-right: 5px;
-  width: 18px;
-}
+a {
+  color: $brand-color;
+  text-decoration: none;
 
-.software-container {
-  border: 1px solid lighten($text-color, 70%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;;
-}
-
-.datasets-container {
-  border: 1px solid lighten($text-color, 70%);
-  border-radius: 10px;
-  padding: 20px;
-  margin-top: 20px;;
-}
-
-.dataset-icon {
-  padding-top: 10px;
-  padding-bottom: 10px;
-  width: 50%;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-
-.software-nav {
-  display: grid;
-  align-items: center;
-  grid-template-columns: repeat(9, 1fr);
-  gap: 0px 10px;
-  padding: 10px;
-  border: 1px solid #e6e6e6;
-  border-radius: 10px;
-  grid-template-columns: repeat(9, 1fr);
-}
-
-// override for smaller screens
-@media screen and (max-width: 479px) {
-  .software-nav {
-    grid-template-columns: repeat(3, 1fr);
-    gap: 0px 40px;
+  &:visited { color: $brand-color; }
+  &:hover { color: $brand-dark; text-decoration: underline; }
+  &:focus-visible {
+    outline: 3px solid $brand-color;
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 }
 
-.software-nav-icon {
-  transition: all .2s ease-in-out;
+// ---- frame ----
+.wrapper {
+  max-width: $content-width;
+  padding-left: $space-5;
+  padding-right: $space-5;
+
+  @include media-query($on-laptop) {
+    max-width: none;
+    padding-left: $space-4;
+    padding-right: $space-4;
+  }
+  @include media-query($on-palm) {
+    padding-left: $space-3;
+    padding-right: $space-3;
+  }
+}
+
+.page-content { padding: 0; }
+main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
+
+// ---- header ----
+.site-header {
+  border-top: 0;
+  border-bottom: 1px solid $grey-color-light;
+  min-height: 0;
+  padding: $space-3 0;
+  background: #fff;
+  position: relative;
+}
+
+.site-title {
+  font-family: $heading-font-family;
+  font-size: 1.6rem;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  line-height: 2.5rem;
+
+  &, &:visited { color: $ink-dark; }
+  &:hover { color: $brand-color; text-decoration: none; }
+}
+
+// logo on the left, nav on the right, vertically centred
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::after { display: none; }
+}
+
+.nav-ritchie-lab-logo {
+  display: block;
+  width: 76px;   // square logo; large enough to keep its lettering legible
+  height: auto;
+  padding: 0;
+
+  @include media-query($on-palm) { width: 60px; }
+}
+
+.site-nav {
+  line-height: 2.5rem;
+
+  .page-link {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: $ink-dark;
+    line-height: 1.4;
+    padding: $space-2 $space-3;
+    border-radius: $pill;
+    border: 0;
+
+    &:not(:last-child) { margin-right: $space-2; }
+    &:hover { background: $tint-grey; color: $ink-dark; text-decoration: none; }
+  }
+}
+
+.selected-page {
+  background: $tint-cream;
+  color: $brand-dark !important;
+  font-weight: 600;
+}
+
+// ---- buttons (pills) ----
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: 9px $space-3;
+  border: 1px solid $brand-color;
+  border-radius: $pill;
+  background: $brand-color;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  line-height: 1.4;
+  text-decoration: none;
+
+  &:visited { color: #fff; }
+  &:hover { background: $brand-dark; border-color: $brand-dark; color: #fff; text-decoration: none; }
+  .svg-icon { fill: #fff; }
+}
+
+.btn-outline {
+  background: transparent;
+  color: $brand-color;
+  &:visited { color: $brand-color; }
+  &:hover { background: $brand-color; color: #fff; }
+}
+
+// ---- about: hero band ----
+.hero {
+  background: $tint-cream;
+  padding: $space-6 0;
+
+  @include media-query($on-laptop) { padding: $space-5 0; }
+}
+
+.about-body {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+  gap: $space-6;
+  align-items: center;
+
+  // The content is two blocks: the logo (first; Markdown may wrap it in a <p>)
+  // and the description (last). Place them by position, not by tag.
+  // Items auto-place into the two columns in source order (logo, text), so they can
+  // never share a cell; `order` puts the text first on wide screens.
+  > * {
+    margin: 0;
+    min-width: 0;
+  }
+
+  > :last-child {
+    order: 1;
+    font-family: $heading-font-family;
+    font-size: 1.75rem;
+    line-height: 1.45;
+    color: $ink-dark;
+  }
+
+  > :first-child {
+    order: 2;
+    padding: $space-4;
+    background: #fff;
+    border-radius: $radius;
+  }
+
+  .about-logo {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
+  @include media-query($on-laptop) {
+    grid-template-columns: minmax(0, 1fr);
+    gap: $space-4;
+    > :last-child { order: 2; font-size: 1.3rem; }
+    > :first-child { order: 1; padding: $space-3; }
+  }
+}
+
+// ---- listing pages: tinted title band, then card grid ----
+.page-band {
+  background: $tint-cream;
+  padding: $space-6 0 $space-5;
+
+  .listing-title { margin-bottom: $space-4; }
+  @include media-query($on-laptop) { padding: $space-5 0 $space-4; }
+}
+
+.listing-body { padding-top: $space-5; padding-bottom: $space-6; }
+
+.software-nav {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+
+  li { margin: 0; }
+
+  a {
+    display: inline-flex;
+    align-items: center;
+    gap: $space-2;
+    padding: $space-1 $space-3 $space-1 $space-2;
+    border-radius: $pill;
+    background: #fff;
+    border: 1px solid transparent;
+    color: $ink-dark;
+    font-size: 0.875rem;
+    font-weight: 500;
+
+    &:hover { border-color: $brand-color; color: $brand-color; text-decoration: none; }
+  }
+}
+
+.software-package-icon {
+  width: 56px;
+  height: 56px;
+  padding: 0;
+  object-fit: contain;
+  object-position: left center;
+}
+
+.software-nav .software-package-icon { width: 24px; height: 24px; }
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: $space-4;
+
+  @include media-query(1024px) { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  @include media-query($on-palm) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.card-grid-2 {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  @include media-query($on-laptop) { grid-template-columns: minmax(0, 1fr); }
+}
+
+.entry {
+  display: flex;
+  flex-direction: column;
+  background: $tint-grey;
+  border: 0;
+  border-radius: $radius;
+  box-shadow: none;
+  padding: $space-4;
+  margin: 0;
+  scroll-margin-top: $space-4;
+}
+
+.entry-side { margin-bottom: $space-3; }
+
+.entry-figure {
+  margin: (-$space-4) (-$space-4) $space-3;
+  border-radius: $radius $radius 0 0;
+  overflow: hidden;
+  background: #fff;
+}
+
+.dataset-icon {
+  display: block;
   width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: contain;
+  padding: $space-3;
+  margin: 0;
+  background: #fff;
 }
 
-.software-nav-icon:hover {
-  opacity: 0.8;
-  transform: scale(1.1);
+.entry-main {
+  flex: 1;
+  min-width: 0;
+  .entry-title { margin-bottom: $space-2; }
+  .entry-desc { margin-bottom: $space-3; }
 }
 
-html {
-  scroll-behavior: smooth;
+.entry-papers {
+  list-style: none;
+  margin: 0 0 $space-3;
+  li { margin-bottom: $space-2; font-size: 0.9375rem; }
+}
+
+.entry-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  margin: $space-2 0 0;
+}
+
+.software-link-icon {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  object-fit: contain;
+}
+
+.svg-icon {
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  fill: $grey-color;
+}
+
+// ---- footer: dark institute footer ----
+.site-footer {
+  background: $ink-dark;
+  color: #e7e6e5;
+  border-top: 0;
+  padding: $space-5 0;
+}
+
+.footer-col-wrapper {
+  display: grid;
+  grid-template-columns: 1fr 1fr 2fr;
+  gap: $space-5;
+  margin-left: 0;
+  font-size: 0.9375rem;
+  color: #e7e6e5;
+
+  &::after { display: none; }
+
+  @include media-query($on-laptop) { grid-template-columns: minmax(0, 1fr); gap: $space-3; }
+}
+
+.footer-col {
+  float: none;
+  width: auto;
+  padding-left: 0;
+  margin: 0;
+}
+
+.contact-list, .social-media-list { margin: 0; }
+.contact-list li:first-child { font-family: $heading-font-family; font-size: 1.2rem; color: #fff; }
+.footer-col p { margin: 0; }
+.site-footer a { color: #fff; text-decoration: underline; &:visited { color: #fff; } &:hover { color: $tint-cream; } }
+.site-footer .svg-icon { fill: #fff; }
+.site-footer a:focus-visible { outline-color: #fff; }
+
+// ---- small screens ----
+@include media-query($on-palm) {
+  h1, .post-title, .listing-title { font-size: 2rem; }
+  .about-body p { font-size: 1.15rem; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
 }

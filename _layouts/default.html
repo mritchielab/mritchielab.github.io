@@ -8,9 +8,13 @@
     {%- include header.html -%}
 
     <main class="page-content" aria-label="Content">
+      {%- if page.layout == "about" or page.layout == "software" or page.layout == "datasets" -%}
+        {{ content }}
+      {%- else -%}
       <div class="wrapper">
         {{ content }}
       </div>
+      {%- endif -%}
     </main>
 
     {%- include footer.html -%}

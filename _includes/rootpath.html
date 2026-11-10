@@ -1,0 +1,27 @@
+{%- comment -%}
+  Sets `rootpath` to the path back to the site root, so links and assets work on the
+  domain root and when the site is served under a sub-path (e.g. a project page).
+  - Normal pages: relative ("./" on the home page, "../" one level down).
+  - 404.html: GitHub Pages serves it for missing paths at any depth, so relative links
+    cannot work there; use an absolute base instead (the Pages URL of this repository
+    when known, else site.url + site.baseurl).
+{%- endcomment -%}
+{%- if page.path == "404.html" -%}
+  {%- if site.github.url -%}
+    {%- assign rp_base = site.github.url -%}
+  {%- else -%}
+    {%- assign rp_base = site.url | append: site.baseurl -%}
+  {%- endif -%}
+  {%- assign rootpath = rp_base | append: "/" -%}
+{%- else -%}
+  {%- assign rp_segments = page.url | split: "/" | size -%}
+  {%- if rp_segments > 1 -%}
+    {%- assign rp_depth = rp_segments | minus: 1 -%}
+    {%- assign rootpath = "" -%}
+    {%- for i in (1..rp_depth) -%}
+      {%- assign rootpath = rootpath | append: "../" -%}
+    {%- endfor -%}
+  {%- else -%}
+    {%- assign rootpath = "./" -%}
+  {%- endif -%}
+{%- endif -%}

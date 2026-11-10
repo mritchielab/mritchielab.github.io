@@ -3,8 +3,9 @@
   <div class="wrapper">
     {%- assign default_paths = site.pages | map: "path" -%}
     {%- assign page_paths = site.header_pages | default: default_paths -%}
-    <a class="site-title" rel="author" href="{{ "/" | relative_url }}">
-      Ritchie Lab
+    {%- include rootpath.html -%}
+    <a class="site-title" rel="author" href="{{ rootpath }}">
+      <img src="{{ rootpath }}assets/images/favicon.png" class="nav-ritchie-lab-logo" alt="Ritchie Lab">
     </a>
 
     {%- if page_paths -%}
@@ -25,9 +26,9 @@
 
             <!-- bold if it is the current selection -->
             {%- if my_page.title == page.title -%}
-            <a class="page-link selected-page" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+            <a class="page-link selected-page" href="{{ rootpath }}{{ my_page.url | remove_first: "/" }}">{{ my_page.title | escape }}</a>
             {%- else -%}
-            <a class="page-link" href="{{ my_page.url | relative_url }}">{{ my_page.title | escape }}</a>
+            <a class="page-link" href="{{ rootpath }}{{ my_page.url | remove_first: "/" }}">{{ my_page.title | escape }}</a>
             {%- endif -%}
 
             {%- endif -%}
