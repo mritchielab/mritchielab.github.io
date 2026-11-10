@@ -24,16 +24,16 @@ $text-hovor-color: #57606a !default;
 
 $background-color: #ffffff !default;
 
-// Institute-style palette
-$brand-color:      #2366b9 !default;   // primary blue
-$brand-dark:       #153a69;            // hover
-$tint-blue:        #deeaff;            // hero / page bands
-$tint-grey:        #f4f4f2;            // cards
-$ink-dark:         #1e1e1e;            // footer
+// Palette taken from the lab logo (black lettering, tomato-sauce red, pineapple/apple cream)
+$brand-color:      #b5292d !default;   // logo red (links, buttons; AA on white and cream)
+$brand-dark:       #7f1d1d;            // hover
+$tint-cream:       #fbf4cf;            // hero / page bands (logo cream)
+$tint-grey:        #f6f3e8;            // cards (warm off-white)
+$ink-dark:         #111111;            // headings, footer (logo black)
 
 $grey-color:       #5a5a5a !default;
-$grey-color-light: #dddddd !default;
-$grey-color-dark:  #1e1e1e !default;
+$grey-color-light: #e2dccb !default;   // warm rule colour
+$grey-color-dark:  #111111 !default;
 
 $table-text-align: left !default;
 
@@ -192,7 +192,7 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 }
 
 .selected-page {
-  background: $tint-blue;
+  background: $tint-cream;
   color: $brand-dark !important;
   font-weight: 600;
 }
@@ -226,7 +226,7 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 
 // ---- about: hero band ----
 .hero {
-  background: $tint-blue;
+  background: $tint-cream;
   padding: $space-6 0;
 
   @include media-query($on-laptop) { padding: $space-5 0; }
@@ -281,7 +281,7 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 
 // ---- listing pages: tinted title band, then card grid ----
 .page-band {
-  background: $tint-blue;
+  background: $tint-cream;
   padding: $space-6 0 $space-5;
 
   .listing-title { margin-bottom: $space-4; }
@@ -436,7 +436,7 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 .contact-list, .social-media-list { margin: 0; }
 .contact-list li:first-child { font-family: $heading-font-family; font-size: 1.2rem; color: #fff; }
 .footer-col p { margin: 0; }
-.site-footer a { color: #fff; text-decoration: underline; &:visited { color: #fff; } &:hover { color: $tint-blue; } }
+.site-footer a { color: #fff; text-decoration: underline; &:visited { color: #fff; } &:hover { color: $tint-cream; } }
 .site-footer .svg-icon { fill: #fff; }
 .site-footer a:focus-visible { outline-color: #fff; }
 
