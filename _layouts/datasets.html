@@ -1,6 +1,7 @@
 ---
 layout: default
 ---
+{%- include rootpath.html -%}
 <article class="listing">
   <header class="page-band">
     <div class="wrapper">
@@ -14,7 +15,7 @@ layout: default
       <section class="entry card datasets-container">
         {%- if dataset.icon -%}
         <div class="entry-figure">
-          <img src="/assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}" loading="lazy"/>
+          <img src="{{ rootpath }}assets/images/datasets/{{ dataset.icon }}" class="dataset-icon" alt="{{ dataset.name }}" loading="lazy"/>
         </div>
         {%- endif -%}
         <div class="entry-main">
@@ -38,7 +39,7 @@ layout: default
         </div>
         <p class="entry-links">
           <a class="btn" href="{{ dataset.code }}">
-            <svg class="svg-icon"><use xlink:href="/assets/minima-social-icons.svg#code"></use></svg>
+            <svg class="svg-icon"><use xlink:href="{{ rootpath }}assets/minima-social-icons.svg#code"></use></svg>
             Analysis Code
           </a>
         </p>
