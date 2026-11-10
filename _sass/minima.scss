@@ -156,13 +156,22 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
   &:hover { color: $brand-color; text-decoration: none; }
 }
 
+// logo on the left, nav on the right, vertically centred
+.site-header .wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  &::after { display: none; }
+}
+
 .nav-ritchie-lab-logo {
   display: block;
-  width: 180px;
+  width: 76px;   // square logo; large enough to keep its lettering legible
   height: auto;
   padding: 0;
 
-  @include media-query($on-palm) { width: 140px; }
+  @include media-query($on-palm) { width: 60px; }
 }
 
 .site-nav {
