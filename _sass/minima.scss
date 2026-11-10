@@ -220,34 +220,43 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
   gap: $space-6;
   align-items: center;
 
-  p {
-    grid-column: 1;
+  // The content is two blocks: the logo (first; Markdown may wrap it in a <p>)
+  // and the description (last). Place them by position, not by tag.
+  > * {
     grid-row: 1;
+    margin: 0;
+    min-width: 0;
+  }
+
+  > :last-child {
+    grid-column: 1;
     font-family: $heading-font-family;
     font-size: 1.75rem;
     line-height: 1.45;
     color: $ink-dark;
-    margin: 0;
   }
 
-  .about-logo {
+  > :first-child {
     grid-column: 2;
-    grid-row: 1;
-    display: block;
-    width: 100%;
-    max-width: none;
-    height: auto;
-    margin: 0;
     padding: $space-4;
     background: #fff;
     border-radius: $radius;
   }
 
+  .about-logo {
+    display: block;
+    width: 100%;
+    max-width: none;
+    height: auto;
+    margin: 0;
+    padding: 0;
+  }
+
   @include media-query($on-laptop) {
     grid-template-columns: minmax(0, 1fr);
     gap: $space-4;
-    p { grid-column: 1; grid-row: 2; font-size: 1.3rem; }
-    .about-logo { grid-column: 1; grid-row: 1; padding: $space-3; }
+    > :last-child { grid-column: 1; grid-row: 2; font-size: 1.3rem; }
+    > :first-child { grid-column: 1; grid-row: 1; padding: $space-3; }
   }
 }
 
