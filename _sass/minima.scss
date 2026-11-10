@@ -156,6 +156,15 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
   &:hover { color: $brand-color; text-decoration: none; }
 }
 
+.nav-ritchie-lab-logo {
+  display: block;
+  width: 180px;
+  height: auto;
+  padding: 0;
+
+  @include media-query($on-palm) { width: 140px; }
+}
+
 .site-nav {
   line-height: 2.5rem;
 
@@ -222,14 +231,15 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
 
   // The content is two blocks: the logo (first; Markdown may wrap it in a <p>)
   // and the description (last). Place them by position, not by tag.
+  // Items auto-place into the two columns in source order (logo, text), so they can
+  // never share a cell; `order` puts the text first on wide screens.
   > * {
-    grid-row: 1;
     margin: 0;
     min-width: 0;
   }
 
   > :last-child {
-    grid-column: 1;
+    order: 1;
     font-family: $heading-font-family;
     font-size: 1.75rem;
     line-height: 1.45;
@@ -237,7 +247,7 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
   }
 
   > :first-child {
-    grid-column: 2;
+    order: 2;
     padding: $space-4;
     background: #fff;
     border-radius: $radius;
@@ -255,8 +265,8 @@ main .wrapper:first-child { padding-top: $space-5; padding-bottom: $space-5; }
   @include media-query($on-laptop) {
     grid-template-columns: minmax(0, 1fr);
     gap: $space-4;
-    > :last-child { grid-column: 1; grid-row: 2; font-size: 1.3rem; }
-    > :first-child { grid-column: 1; grid-row: 1; padding: $space-3; }
+    > :last-child { order: 2; font-size: 1.3rem; }
+    > :first-child { order: 1; padding: $space-3; }
   }
 }
 
